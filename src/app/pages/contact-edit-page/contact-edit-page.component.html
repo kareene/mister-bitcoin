@@ -1,10 +1,10 @@
 <section class="contact-edit-page" *ngIf="currContact">
     <nav>
         <button title="Back" (click)="onGoBack()">
-            <img src="../../../assets/img/back-arrow.svg" />
+            <img src="assets/img/back-arrow.svg" />
         </button>
         <button title="Delete" (click)="onDeleteContact()" *ngIf="currContact._id">
-            <img src="../../../assets/img/trash.svg" />
+            <img src="assets/img/trash.svg" />
         </button>
     </nav>
     <form (ngSubmit)="onSaveContact()" #contactForm="ngForm">

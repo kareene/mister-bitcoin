@@ -9,7 +9,7 @@ export class Contact {
             if (this.name) {
                 this.imgUrl = `https://robohash.org/${this.name.toLocaleLowerCase().replace(/\s+/g, '')}`;
             } else {
-                this.imgUrl = '../../../assets/img/robot.svg';
+                this.imgUrl = 'assets/img/robot.svg';
             }
     }
 
