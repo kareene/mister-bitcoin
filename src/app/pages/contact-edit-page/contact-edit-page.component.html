@@ -1,0 +1,39 @@
+<section class="contact-edit-page" *ngIf="currContact">
+    <nav>
+        <button title="Back" (click)="onGoBack()">
+            <img src="../../../assets/img/back-arrow.svg" />
+        </button>
+        <button title="Delete" (click)="onDeleteContact()" *ngIf="currContact._id">
+            <img src="../../../assets/img/trash.svg" />
+        </button>
+    </nav>
+    <form (ngSubmit)="onSaveContact()" #contactForm="ngForm">
+        <img [src]="currContact.imgUrl" />
+        <section>
+            <label for="name">Name<span>*</span></label>
+            <div>
+                <input type="text" name="name" id="name" required placeholder="Name"
+                    [(ngModel)]="currContact.name" #name="ngModel">
+                <p [ngClass]="{hidden: name.valid || name.untouched}" class="invalid-message">
+                    Name is required
+                </p>
+            </div>
+        </section>
+        <section>
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" id="phone" placeholder="Phone"
+                [(ngModel)]="currContact.phone" #phone="ngModel" class="no-invalid-message">
+        </section>
+        <section>
+            <label for="email">Email</label>
+            <div>
+                <input type="email" name="email" id="email" placeholder="Email" email
+                    [(ngModel)]="currContact.email" #email="ngModel">
+                <p [ngClass]="{hidden: email.valid || email.pristine}" class="invalid-message">
+                    Email is not valid
+                </p>
+            </div>
+        </section>
+        <button class="call-to-action" type="submit" [disabled]="!contactForm.valid">Save</button>
+    </form>
+</section>

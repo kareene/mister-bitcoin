@@ -1,0 +1,18 @@
+<section class="contact-details-page" *ngIf="currContact">
+    <nav>
+        <a routerLink="/contact" title="Back">
+            <img src="../../../assets/img/back-arrow.svg" />
+        </a>
+        <a [routerLink]="['/', 'contact', 'edit', currContact._id]" title="Edit">
+            <img src="../../../assets/img/edit.svg" />
+        </a>
+    </nav>
+    <article class="contact-info">
+        <img [src]="currContact.imgUrl">
+        <p>Name: {{currContact.name}}</p>
+        <p>Phone: {{currContact.phone}}</p>
+        <p>Email: {{currContact.email}}</p>
+    </article>
+    <transfer-fund [contact]="currContact" (coinsTransfered)="loadMoves()"></transfer-fund>
+    <moves-list [moves]="moves" [toContact]="currContact.name"></moves-list>
+</section>

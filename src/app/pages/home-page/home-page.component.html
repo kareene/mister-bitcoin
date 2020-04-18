@@ -1,0 +1,12 @@
+<section class="home-page" *ngIf="loggedinUser">
+    <h2>Hello {{loggedinUser.name}}!</h2>
+    <div>
+        <img src="../../../assets/img/coins.svg" />
+        <p>Coins: {{loggedinUser.coins}}</p>
+    </div>
+    <div>
+        <img src="../../../assets/img/bitcoin.svg" />
+        <p>USD to BTC: <span *ngIf="btcRate">{{btcRate}}</span></p>
+    </div>
+    <moves-list [moves]="loggedinUser.moves"></moves-list>
+</section>

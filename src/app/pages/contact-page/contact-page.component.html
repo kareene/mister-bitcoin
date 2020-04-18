@@ -1,0 +1,7 @@
+<section class="contact-page">
+    <contact-filter [filterBy]="filterBy" (setFilter)="setFilter($event)"></contact-filter>
+    <contact-list [contacts]="contacts"></contact-list>
+    <a routerLink="/contact/edit" class="add-contact-btn">
+        <img src="../../../assets/img/plus.svg" />
+    </a> 
+</section>

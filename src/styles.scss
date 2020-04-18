@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: unset;
+}
+
+input {
+    border: 1px solid darkgrey;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+}
+
+.call-to-action {
+    color: #000;
+    background-color: #ffd1be;
+    border: 2px solid #fe7d43;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+}
+
+.invalid-message {
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+    color: #fe7d43;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.hidden {
+    visibility: hidden;
+}

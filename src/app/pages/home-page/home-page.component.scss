@@ -1,0 +1,14 @@
+.home-page {
+    div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        img {
+            width: 1.5rem;
+            margin-right: 0.5rem;
+        }
+    }
+    div:last-of-type {
+        margin-bottom: 1rem;
+    }
+}
