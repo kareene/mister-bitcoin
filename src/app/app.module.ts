@@ -19,7 +19,6 @@ import { ChartComponent } from './components/chart/chart.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { MovesListComponent } from './components/moves-list/moves-list.component';
 import { TransferFundComponent } from './components/transfer-fund/transfer-fund.component';
-import { MinDirective } from './directives/min.directive';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,6 @@ import { MinDirective } from './directives/min.directive';
     MainHeaderComponent,
     MovesListComponent,
     TransferFundComponent,
-    MinDirective,
   ],
   imports: [
     BrowserModule,
