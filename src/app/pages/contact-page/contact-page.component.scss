@@ -1,8 +1,12 @@
 .contact-page {
+    position: relative;
     .add-contact-btn {
         position: fixed;
-        bottom: 20px;
-        right: 15px;
+        bottom: 3.4rem;
+        right: 1rem;
+        @media (min-width: 26rem) {
+            right: calc((100% - 24rem) / 2);
+        }
         width: 4rem;
         height: 4rem;
         padding: 0.75rem;

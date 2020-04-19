@@ -4,13 +4,17 @@
     display: flex;
     flex-direction: column;
     .content-container {
-        width: calc(100% - 30px);
+        width: calc(100% - 2rem);
+        max-width: 24rem;
         margin: 0 auto;
         padding-top: 5rem;
         flex-grow: 1;
     }
     footer {
         text-align: center;
+        small {
+            font-size: 0.9rem;
+        }
         padding: 1.25rem 0;
     }
 }

@@ -8,15 +8,20 @@
     border-bottom: 1px solid darkgrey;
     box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
     nav {
+        max-width: 24rem;
+        margin: 0 auto;
         display: flex;
         align-items: center;
-        justify-content: space-around;
-        a {
+        justify-content: space-between;
+        a, button {
             width: 3rem;
             height: 3rem;
             padding: 0.5rem;
             border-radius: 50%;
             border: 3px solid transparent;
+        }
+        button {
+            background-color: #fff;
         }
         .active {
             background-color: #ffd1be;

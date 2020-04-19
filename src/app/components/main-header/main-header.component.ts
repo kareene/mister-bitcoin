@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'main-header',
@@ -9,12 +9,14 @@ import { User } from 'src/app/models/user.model';
 })
 export class MainHeaderComponent implements OnInit {
 
-  loggedinUser: User = null;
-
-  constructor(private userService: UserService) { }
+  constructor(private router: Router,private userService: UserService) { }
 
   ngOnInit(): void {
-    // this.loggedinUser = this.userService.getUser();
+  }
+
+  onLogout(): void {
+    this.userService.logout();
+    this.router.navigate(['/signup']);
   }
 
 }

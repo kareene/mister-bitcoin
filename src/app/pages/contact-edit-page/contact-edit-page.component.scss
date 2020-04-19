@@ -9,11 +9,11 @@
         }
         button {
             border: none;
+            padding: 0;
             background-color: #fff;
         }
     }
     form {
-        max-width: 24rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -41,9 +41,6 @@
                     color: #fe7d43;
                 }
             }
-            // input:not(:required) {
-            //     margin-bottom: 1.4rem;
-            // }
             input {
                 width: 85%;
                 &.no-invalid-message {

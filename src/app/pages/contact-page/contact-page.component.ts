@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ContactService } from 'src/app/services/contact.service';
 import { Contact } from 'src/app/models/contact.model';
 import { FilterBy } from 'src/app/models/filterBy.model';
@@ -9,23 +9,16 @@ import { FilterBy } from 'src/app/models/filterBy.model';
   templateUrl: './contact-page.component.html',
   styleUrls: ['./contact-page.component.scss']
 })
-export class ContactPageComponent implements OnInit, OnDestroy {
+export class ContactPageComponent implements OnInit {
 
-  contacts: Contact[] = [];
+  contacts$: Observable<Contact[]>;
   filterBy: FilterBy = { term: '' };
-  subscription: Subscription;
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit(): void {
     this.contactService.loadContacts(this.filterBy);
-    this.subscription = this.contactService.contacts$.subscribe((contacts) => {
-      this.contacts = contacts;
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.contacts$ = this.contactService.contacts$;
   }
 
   setFilter(filterBy: FilterBy): void {

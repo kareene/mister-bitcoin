@@ -9,13 +9,15 @@ import { Move } from 'src/app/models/move.model';
 export class MovesListComponent implements OnInit {
 
   title: string;
+  maxMovesToDisplay = 5;
   @Input() moves: Move[];
   @Input() toContact: string;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.title = (this.toContact) ? `Your Moves to ${this.toContact}:` : 'Your Moves:';
+    this.title = (this.toContact) ? `Your Moves to ${this.toContact}:` :
+      `Your Last ${this.maxMovesToDisplay} Moves:`;
   }
 
 }

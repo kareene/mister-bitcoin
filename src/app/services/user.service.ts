@@ -33,6 +33,12 @@ export class UserService {
     }
     localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
   }
+  
+  public logout(): void {
+    if (!this.loggedInUser) return;
+    localStorage.removeItem('loggedinuser');
+    this.loggedInUser = null;
+  }
 
   public addMove(contact: Contact, amount: number): void {
     var move: Move = {
@@ -48,7 +54,7 @@ export class UserService {
 
   transferAmountValidator = (control: AbstractControl): { [key: string]: boolean } | null => {
     const value = control.value;
-    if (value && !isNaN(value) && Number.isInteger(value) && value > 0 && value <= this.loggedInUser.coins) {
+    if (value && !isNaN(value) && value > 0 && value <= this.loggedInUser.coins) {
       return null;
     }
     return { invalidTransferAmount: true };
