@@ -187,7 +187,7 @@ export class ContactService {
     this._contacts = this._contacts.map(c => contact._id === c._id ? contact : c)
     // change the observable data in the service - let all the subscribers know
     this._contacts$.next(this._sort(this._contacts))
-    return Promise.resolve(contact);
+    return contact;
   }
 
   private _addContact(contact: Contact) {
@@ -197,7 +197,7 @@ export class ContactService {
     this._contacts.push(newContact)
     // change the observable data in the service - let all the subscribers know
     this._contacts$.next(this._sort(this._contacts))
-    return Promise.resolve(newContact);
+    return newContact;
   }
 
   private _sort(contacts: Contact[]): Contact[] {

@@ -13,6 +13,6 @@
         <p>Phone: {{currContact.phone}}</p>
         <p>Email: {{currContact.email}}</p>
     </article>
-    <transfer-fund [contact]="currContact" (coinsTransfered)="loadMoves()"></transfer-fund>
-    <moves-list [moves]="moves" [toContact]="currContact.name"></moves-list>
+    <transfer-fund [contact]="currContact"></transfer-fund>
+    <moves-list [moves]="moves$ | async" [toContact]="currContact.name"></moves-list>
 </section>

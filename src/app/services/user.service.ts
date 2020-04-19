@@ -1,28 +1,32 @@
 import { Injectable } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 import { Contact } from '../models/contact.model';
 import { Move } from '../models/move.model';
-import { AbstractControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  loggedInUser: User = JSON.parse(localStorage.getItem('loggedInUser'));
+  private loggedInUser: User = JSON.parse(localStorage.getItem('loggedInUser'));
 
-  constructor() { }
+  private _isUserLoggedin$ = new BehaviorSubject<Boolean>(false);
+  public isUserLoggedin$ = this._isUserLoggedin$.asObservable();
+  private _coins$ = new BehaviorSubject<number>(0);
+  public coins$ = this._coins$.asObservable();
+  private _moves$ = new BehaviorSubject<Move[]>([]);
+  public moves$ = this._moves$.asObservable();
+
+  constructor() {
+    this._isUserLoggedin$.next(!!this.loggedInUser);
+    this._coins$.next(this.loggedInUser.coins);
+    this._moves$.next(this.loggedInUser.moves);
+  }
   
   public getUser(): User {
     return this.loggedInUser;
-  }
-
-  public getCoins(): number {
-    return (this.loggedInUser) ? this.loggedInUser.coins : 0;
-  }
-
-  public getMoves(): Move[] {
-    return (this.loggedInUser) ? this.loggedInUser.moves : [];
   }
 
   public signup(name: string): void {
@@ -32,12 +36,14 @@ export class UserService {
       moves: []
     }
     localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
+    this._isUserLoggedin$.next(!!this.loggedInUser);
   }
   
   public logout(): void {
     if (!this.loggedInUser) return;
-    localStorage.removeItem('loggedinuser');
     this.loggedInUser = null;
+    localStorage.removeItem('loggedinuser');
+    this._isUserLoggedin$.next(!!this.loggedInUser);
   }
 
   public addMove(contact: Contact, amount: number): void {
@@ -50,6 +56,8 @@ export class UserService {
     this.loggedInUser.coins -= amount;
     this.loggedInUser.moves.unshift(move);
     localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
+    this._coins$.next(this.loggedInUser.coins);
+    this._moves$.next(this.loggedInUser.moves);
   }
 
   transferAmountValidator = (control: AbstractControl): { [key: string]: boolean } | null => {

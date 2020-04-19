@@ -1,4 +1,4 @@
-<header class="main-header">
+<header class="main-header" *ngIf="isUserLoggedin$ | async">
     <nav>
         <a routerLink="" title="Home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             <img src="assets/img/home.svg" />

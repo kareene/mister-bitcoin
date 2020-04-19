@@ -1,34 +1,39 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
 import { UserService } from 'src/app/services/user.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'transfer-fund',
   templateUrl: './transfer-fund.component.html',
   styleUrls: ['./transfer-fund.component.scss']
 })
-export class TransferFundComponent implements OnInit {
+export class TransferFundComponent implements OnInit, OnDestroy {
 
   transferForm: FormGroup;
-  maxCoins: number = 0;
+  maxCoins: number;
+  subscription: Subscription;
   @Input() contact: Contact;
-  @Output() coinsTransfered = new EventEmitter<void>();
 
   constructor(private formBuilder: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.maxCoins = this.userService.getCoins();
+    this.subscription = this.userService.coins$.subscribe(coins => {
+        this.maxCoins = coins;
+    });
     this.transferForm = this.formBuilder.group({
 			'amount': [null, [Validators.required, this.userService.transferAmountValidator]]
 		});
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   onTransferCoins(): void {
     this.userService.addMove(this.contact, this.transferForm.value.amount);
-    this.maxCoins = this.userService.getCoins();
     this.transferForm.reset();
-    this.coinsTransfered.emit();
   }
 
 }
