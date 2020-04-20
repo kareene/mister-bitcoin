@@ -4,7 +4,7 @@
         <input type="number" [formControl]="transferForm.get('amount')" #amount="ngForm" placeholder="Amount">
         <button class="call-to-action" type="submit" [disabled]="!transferForm.valid">Transfer</button>
         <p *ngIf="maxCoins" [ngClass]="{hidden: amount.valid || amount.pristine}" class="invalid-message">
-            Amount between 0 and {{maxCoins}} coins
+            Amount between 0 and {{maxCoins$ | async}} coins
         </p>
         <p *ngIf="!maxCoins" [ngClass]="{hidden: amount.valid || amount.pristine}" class="invalid-message">
             No Coins Left

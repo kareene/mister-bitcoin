@@ -12,18 +12,14 @@ export class UserService {
 
   private loggedInUser: User = JSON.parse(localStorage.getItem('loggedInUser'));
 
-  private _isUserLoggedin$ = new BehaviorSubject<Boolean>(false);
+  private _isUserLoggedin$ = new BehaviorSubject<Boolean>(!!this.loggedInUser);
   public isUserLoggedin$ = this._isUserLoggedin$.asObservable();
-  private _coins$ = new BehaviorSubject<number>(0);
+  private _coins$ = new BehaviorSubject<number>((this.loggedInUser) ? this.loggedInUser.coins : 0);
   public coins$ = this._coins$.asObservable();
-  private _moves$ = new BehaviorSubject<Move[]>([]);
+  private _moves$ = new BehaviorSubject<Move[]>((this.loggedInUser) ? this.loggedInUser.moves : []);
   public moves$ = this._moves$.asObservable();
 
-  constructor() {
-    this._isUserLoggedin$.next(!!this.loggedInUser);
-    this._coins$.next(this.loggedInUser.coins);
-    this._moves$.next(this.loggedInUser.moves);
-  }
+  constructor() {  }
   
   public getUser(): User {
     return this.loggedInUser;
@@ -36,14 +32,14 @@ export class UserService {
       moves: []
     }
     localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
-    this._isUserLoggedin$.next(!!this.loggedInUser);
+    this._isUserLoggedin$.next(true);
   }
   
   public logout(): void {
     if (!this.loggedInUser) return;
     this.loggedInUser = null;
-    localStorage.removeItem('loggedinuser');
-    this._isUserLoggedin$.next(!!this.loggedInUser);
+    localStorage.removeItem('loggedInUser');
+    this._isUserLoggedin$.next(false);
   }
 
   public addMove(contact: Contact, amount: number): void {
