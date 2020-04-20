@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,28 +9,19 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './transfer-fund.component.html',
   styleUrls: ['./transfer-fund.component.scss']
 })
-export class TransferFundComponent implements OnInit, OnDestroy {
+export class TransferFundComponent implements OnInit {
 
   maxCoins$: Observable<number>;
   transferForm: FormGroup;
-  maxCoins: number;
-  subscription: Subscription;
   @Input() contact: Contact;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
     this.maxCoins$ = this.userService.coins$;
-    this.subscription = this.userService.coins$.subscribe(coins => {
-        this.maxCoins = coins;
-    });
     this.transferForm = this.formBuilder.group({
 			'amount': [null, [Validators.required, this.userService.transferAmountValidator]]
 		});
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   onTransferCoins(): void {
