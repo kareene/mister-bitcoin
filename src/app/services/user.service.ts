@@ -32,14 +32,20 @@ export class UserService {
       moves: []
     }
     localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
+
     this._isUserLoggedin$.next(true);
+    this._coins$.next(this.loggedInUser.coins);
+    this._moves$.next(this.loggedInUser.moves);
   }
   
   public logout(): void {
     if (!this.loggedInUser) return;
     this.loggedInUser = null;
     localStorage.removeItem('loggedInUser');
+
     this._isUserLoggedin$.next(false);
+    this._coins$.next(0);
+    this._moves$.next([]);
   }
 
   public addMove(contact: Contact, amount: number): void {
@@ -52,6 +58,7 @@ export class UserService {
     this.loggedInUser.coins -= amount;
     this.loggedInUser.moves.unshift(move);
     localStorage.setItem('loggedInUser', JSON.stringify(this.loggedInUser));
+    
     this._coins$.next(this.loggedInUser.coins);
     this._moves$.next(this.loggedInUser.moves);
   }
