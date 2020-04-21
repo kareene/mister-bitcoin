@@ -13,6 +13,7 @@ import { Contact } from 'src/app/models/contact.model';
 export class ContactEditPageComponent implements OnInit, OnDestroy {
 
   currContact: Contact = new Contact;
+  contactImg: string = 'assets/img/robot.svg';
   subscription: Subscription;
 
   constructor(private route: ActivatedRoute, private router: Router, private location: Location,
@@ -25,6 +26,7 @@ export class ContactEditPageComponent implements OnInit, OnDestroy {
       this.subscription = this.contactService.getContactById(params.id).subscribe(
         contact => {
           this.currContact = JSON.parse(JSON.stringify(contact));
+          this.contactImg = `https://robohash.org/${this.currContact.name}`;
         },
         err => {
           this.router.navigate(['/contact']);
@@ -45,9 +47,15 @@ export class ContactEditPageComponent implements OnInit, OnDestroy {
     this.router.navigate(['/contact']);
   }
 
-  async onSaveContact(): Promise<void> {
-    const contact = await this.contactService.saveContact(this.currContact);
-    this.router.navigate([`/contact/${contact._id}`]);
+  onSaveContact(): void {
+    if (this.subscription) this.subscription.unsubscribe();
+    this.subscription = this.contactService.saveContact(this.currContact).subscribe(
+      contact => {
+        this.router.navigate([`/contact/${contact._id}`]);
+      },
+      err => {
+        this.router.navigate(['/contact']);
+      });
   }
 
 }

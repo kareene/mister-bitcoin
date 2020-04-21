@@ -18,11 +18,16 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        img {
+        .img-container {
             background-color: #e0e0e0;
             width: 7.4rem;
+            height: 7.4rem;
             border-radius: 50%;
             margin-bottom: 1.4rem;
+        }
+        img {
+            width: 100%;
+            border-radius: 50%;
         }
         section {
             width: 100%;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BitcoinService } from 'src/app/services/bitcoin.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
@@ -11,13 +12,13 @@ import { User } from 'src/app/models/user.model';
 export class HomePageComponent implements OnInit {
 
   loggedinUser: User = null;
-  btcRate: number = null;
+  btcRate: Observable<number>;
 
   constructor(private userService: UserService, private bitcoinService: BitcoinService) { }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.loggedinUser = this.userService.getUser();
-    this.btcRate = await this.bitcoinService.getRate(1);
+    this.btcRate = this.bitcoinService.getRate(1);
   }
 
 }

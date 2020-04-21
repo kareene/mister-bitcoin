@@ -1,4 +1,6 @@
 <a class="contact-preview" [routerLink]="['/', 'contact', contact._id]">
-    <img [src]="contact.imgUrl" />
+    <div class="img-container">
+        <img [src]="contactImg" />
+    </div>
     <h3>{{contact.name}}</h3>
 </a>

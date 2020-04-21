@@ -1,5 +1,6 @@
-<header class="main-header" *ngIf="isUserLoggedin$ | async">
-    <nav>
+<header class="main-header">
+    <h1 *ngIf="!(isUserLoggedin$ | async)">Mister Bitcoin</h1>
+    <nav *ngIf="isUserLoggedin$ | async">
         <a routerLink="" title="Home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             <img src="assets/img/home.svg" />
         </a>

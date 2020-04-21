@@ -9,9 +9,14 @@
         }
     }
     .contact-info {
-        img {
+        .img-container {
             background-color: #e0e0e0;
             width: 7.4rem;
+            height: 7.4rem;
+            border-radius: 50%;
+        }
+        img {
+            width: 100%;
             border-radius: 50%;
         }
     }

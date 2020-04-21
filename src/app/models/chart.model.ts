@@ -3,6 +3,8 @@ export interface Chart {
     type: string;
     data: any[][];
     columnNames: string[];
+    width: string;
+    height: string;
     formatters?: any;
     options: any;
     description: string;

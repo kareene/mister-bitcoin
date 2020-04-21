@@ -8,7 +8,9 @@
         </button>
     </nav>
     <form (ngSubmit)="onSaveContact()" #contactForm="ngForm">
-        <img [src]="currContact.imgUrl" />
+        <div class="img-container">
+            <img [src]="contactImg" />
+        </div>
         <section>
             <label for="name">Name<span>*</span></label>
             <div>

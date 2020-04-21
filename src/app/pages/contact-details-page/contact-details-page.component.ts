@@ -15,6 +15,7 @@ import { Move } from 'src/app/models/move.model';
 export class ContactDetailsPageComponent implements OnInit, OnDestroy {
 
   currContact: Contact = null;
+  contactImg: string = '';
   subscription: Subscription;
   moves$: Observable<Move[]>;
 
@@ -27,6 +28,7 @@ export class ContactDetailsPageComponent implements OnInit, OnDestroy {
       this.subscription = this.contactService.getContactById(params.id).subscribe(
         contact => {
           this.currContact = contact;
+          this.contactImg = `https://robohash.org/${this.currContact.name}`;
         },
         err => {
           this.router.navigate(['/contact']);

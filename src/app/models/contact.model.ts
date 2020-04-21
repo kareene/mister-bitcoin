@@ -4,14 +4,7 @@ export class Contact {
         public _id?: string,
         public name: string = '',
         public email: string = '',
-        public phone: string = '',
-        public imgUrl: string = '') {
-            if (this.name) {
-                this.imgUrl = `https://robohash.org/${this.name.toLocaleLowerCase().replace(/\s+/g, '')}`;
-            } else {
-                this.imgUrl = 'assets/img/robot.svg';
-            }
-    }
+        public phone: string = '') { }
 
     setId?() {
         var id = '';

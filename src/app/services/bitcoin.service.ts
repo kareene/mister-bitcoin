@@ -1,29 +1,30 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Statistic } from '../models/statistic.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BitcoinService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public async getRate(coins: number): Promise<number> {
-    const res = await axios.get(`https://blockchain.info/tobtc?currency=USD&value=${coins}`);
-    return res.data;
+  public getRate(coins: number): Observable<number> {
+    return this.http.get<number>(`https://blockchain.info/tobtc?currency=USD&value=${coins}`);
   }
 
-  public async getStatistics(type: string): Promise<{title: string, description: string, unit: string, data: [Date, number][]}> {
-    const res = await axios.get(`https://api.blockchain.info/charts/${type}?timespan=5months&format=json&cors=true`);
-    var statistics = {
-      title: res.data.name,
-      description: res.data.description,
-      unit: res.data.unit,
-      data: res.data.values.map(value => {
-        return [new Date(value.x * 1000), value.y];
-      })
-    }
-    return statistics
+  public getStatistics(type: string): Observable<Statistic> {
+    return this.http.get<any>(`https://api.blockchain.info/charts/${type}?timespan=5months&format=json&cors=true`)
+      .pipe(map(res => {
+        return {
+          title: res.name || '',
+          description: res.description || '',
+          unit: res.unit || '',
+          data: res.values.map(value => [new Date(value.x * 1000), value.y]) || []
+        }
+      }));
   }
 
 }

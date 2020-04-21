@@ -8,7 +8,9 @@
         </a>
     </nav>
     <article class="contact-info">
-        <img [src]="currContact.imgUrl">
+        <div class="img-container">
+            <img [src]="contactImg" />
+        </div>
         <p>Name: {{currContact.name}}</p>
         <p>Phone: {{currContact.phone}}</p>
         <p>Email: {{currContact.email}}</p>

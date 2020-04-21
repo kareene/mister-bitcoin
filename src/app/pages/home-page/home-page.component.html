@@ -6,7 +6,7 @@
     </div>
     <div>
         <img src="assets/img/bitcoin.svg" />
-        <p>USD to BTC: <span *ngIf="btcRate">{{btcRate}}</span></p>
+        <p>USD to BTC: {{btcRate | async}}</p>
     </div>
     <moves-list [moves]="loggedinUser.moves"></moves-list>
 </section>
