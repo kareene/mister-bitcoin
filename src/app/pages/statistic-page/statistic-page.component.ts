@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { BitcoinService } from 'src/app/services/bitcoin.service';
 import { Chart } from 'src/app/models/chart.model';
 
@@ -22,32 +22,25 @@ export class StatisticPageComponent implements OnInit, OnDestroy {
       { type: 'avg-block-size', color: 'red' },
       { type: 'n-transactions', color: 'purple' } 
     ];
-    chartRequsts.map(chartRequst => {
+    chartRequsts.forEach(chartRequst => {
       this._createChart(chartRequst.type, chartRequst.color);
     });
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.map(subscription => {
+    this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
   }
 
   private _createChart(statisticType: string, color: string = 'blue'): void {
     let chart: Chart = {
+      // width, height are set in css
       title: '',
       description: '',
       type: 'AreaChart',
       data: [],
       columnNames: [],
-      width: '100%',
-      height: '200',
-      // formatters: [
-      //   {
-      //     formatter: new google.visualization.DateFormat({ formatType: 'medium' }),
-      //     colIndex: 1
-      //   }
-      // ],
       options: {
         colors: [color],
         chartArea: { left: 0, top: 20, width: '100%', height: '200' },
@@ -58,8 +51,7 @@ export class StatisticPageComponent implements OnInit, OnDestroy {
           gridlines: { count: 0, color: 'transparent' }
         },
         vAxis: {
-          textPosition: 'none',
-          // gridlines: { count: 0, color: 'transparent' }
+          textPosition: 'none'
         }
       }
     };

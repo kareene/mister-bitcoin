@@ -1,13 +1,10 @@
 <article  class="chart">
+  <h3>{{chart.title}}</h3>
   <google-chart class="google-chart"
-    [title]="chart.title"
     [type]="chart.type"
     [data]="chart.data"
     [columnNames]="chart.columnNames"
-    [width]="chart.width"
-    [height]="chart.height"
     [options]="chart.options">
-    <!-- [formatters]="chart.formatters" -->
   </google-chart>
   <p>{{chart.description}}</p>
 </article>

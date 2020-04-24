@@ -6,8 +6,20 @@
     img {
         width: 6rem;
         margin-bottom: 1.5rem;
+        animation: spin 6s infinite ease;
     }
     input {
         width: 12rem;
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotateY(0deg)
+    }
+    75% {
+        transform: rotateY(360deg);
+    }
+    100% {
+        transform: rotateY(360deg);
     }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import * as moment from 'moment';
 import { Statistic } from '../models/statistic.model';
 
 @Injectable({
@@ -22,7 +23,7 @@ export class BitcoinService {
           title: res.name || '',
           description: res.description || '',
           unit: res.unit || '',
-          data: res.values.map(value => [new Date(value.x * 1000), value.y]) || []
+          data: res.values.map(value => [moment(value.x * 1000).format('MMM Do YYYY'), value.y]) || []
         }
       }));
   }

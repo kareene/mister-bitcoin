@@ -27,7 +27,8 @@ const routes: Routes = [
   { path: 'statistic', component: StatisticPageComponent,
     canActivate: [UserLoggedinGuard]
   },
-  { path: 'signup', component: SighupPageComponent }
+  { path: 'signup', component: SighupPageComponent },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
