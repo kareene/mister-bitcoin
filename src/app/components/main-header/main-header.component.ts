@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class MainHeaderComponent implements OnInit {
 
   isUserLoggedin$: Observable<Boolean>;
-  constructor(private router: Router,private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.isUserLoggedin$ = this.userService.isUserLoggedin$;

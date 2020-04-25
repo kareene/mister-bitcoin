@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserLoggedinGuard } from './guards/user-loggedin.guard';
+import { UserNotLoggedinGuard } from './guards/user-not-loggedin.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { ContactDetailsPageComponent } from './pages/contact-details-page/contact-details-page.component';
@@ -27,7 +28,9 @@ const routes: Routes = [
   { path: 'statistic', component: StatisticPageComponent,
     canActivate: [UserLoggedinGuard]
   },
-  { path: 'signup', component: SighupPageComponent },
+  { path: 'signup', component: SighupPageComponent,
+    canActivate: [UserNotLoggedinGuard]
+  },
   { path: '**', redirectTo: '' }
 ];
 
